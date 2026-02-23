@@ -7,6 +7,7 @@ const PAGE_TITLES: Record<string, { title: string; desc: string }> = {
   "/leetcode": { title: "LeetCode Tracker", desc: "Problems, patterns & notes" },
   "/dsa": { title: "DSA Study Board", desc: "Topics, revision & resources" },
   "/techstack": { title: "Tech Stack", desc: "Your learning pipeline" },
+  "/settings": { title: "Settings", desc: "Account & integrations" },
 }
 
 export function Topbar() {

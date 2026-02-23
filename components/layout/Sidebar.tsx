@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react"
 import Image from "next/image"
 import {
   LayoutDashboard, Code2, Brain, Layers,
-  LogOut, ChevronRight
+  LogOut, ChevronRight, Settings
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -15,6 +15,7 @@ const NAV = [
   { href: "/leetcode", label: "LeetCode", icon: Code2 },
   { href: "/dsa", label: "DSA Board", icon: Brain },
   { href: "/techstack", label: "Tech Stack", icon: Layers },
+  { href: "/settings", label: "Settings", icon: Settings },
 ]
 
 export function Sidebar({ user }: { user: any }) {
