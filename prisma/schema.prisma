@@ -1,0 +1,193 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+    directUrl = env("DIRECT_URL")
+}
+
+model User {
+    id            String      @id @default(cuid())
+    email         String      @unique
+    name          String?
+    image         String?
+    emailVerified DateTime?
+    problems      Problem[]
+    topics        DsaTopic[]
+    techStack     TechStack[]
+    accounts      Account[]
+    sessions      Session[]
+    createdAt     DateTime    @default(now())
+}
+
+model Account {
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Module 1: LeetCode ──────────────────────────────────────────
+
+model Problem {
+    id         String         @id @default(cuid())
+    userId     String
+    name       String
+    url        String?
+    difficulty Difficulty
+    date       DateTime?
+    timeTaken  Int?
+    attempts   Int            @default(1)
+    solved     SolveStatus?
+    confidence Int?
+    rating     Int?
+    pattern    String?
+    mistake    String?
+    isContest  Boolean        @default(false)
+    revisit    Boolean        @default(false)
+    notes      String?        @db.Text
+    user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    tags       ProblemTag[]
+    topicLinks TopicProblem[]
+    createdAt  DateTime       @default(now())
+    updatedAt  DateTime       @updatedAt
+}
+
+model Tag {
+    id       String       @id @default(cuid())
+    name     String       @unique
+    problems ProblemTag[]
+}
+
+model ProblemTag {
+    problemId String
+    tagId     String
+    problem   Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+    tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+    @@id([problemId, tagId])
+}
+
+enum Difficulty {
+    Easy
+    Medium
+    Hard
+}
+
+enum SolveStatus {
+    Yes
+    Hint
+    FullSolution
+}
+
+// ── Module 2: DSA Study Board ───────────────────────────────────
+
+model DsaTopic {
+    id           String         @id @default(cuid())
+    userId       String
+    name         String
+    status       StudyStatus    @default(NotStarted)
+    notes        String?        @db.Text
+    lastReviewed DateTime?
+    confidence   Int?
+    order        Int            @default(0)
+    user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    problems     TopicProblem[]
+    resources    Resource[]
+    createdAt    DateTime       @default(now())
+    updatedAt    DateTime       @updatedAt
+}
+
+model TopicProblem {
+    topicId   String
+    problemId String
+    topic     DsaTopic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+    problem   Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+    @@id([topicId, problemId])
+}
+
+model Resource {
+    id      String       @id @default(cuid())
+    title   String
+    url     String
+    type    ResourceType @default(Article)
+    topicId String
+    topic   DsaTopic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+enum StudyStatus {
+    NotStarted
+    InProgress
+    NeedsRevision
+    Done
+}
+
+enum ResourceType {
+    Article
+    Video
+    Course
+    Book
+}
+
+// ── Module 3: Tech Stack ────────────────────────────────────────
+
+model TechStack {
+    id         String         @id @default(cuid())
+    userId     String
+    name       String
+    category   String?
+    stage      LearnStage     @default(WantToLearn)
+    confidence Int?
+    notes      String?
+    order      Int            @default(0)
+    user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    resources  TechResource[]
+    projects   TechProject[]
+    createdAt  DateTime       @default(now())
+    updatedAt  DateTime       @updatedAt
+}
+
+model TechResource {
+    id     String    @id @default(cuid())
+    title  String
+    url    String
+    techId String
+    tech   TechStack @relation(fields: [techId], references: [id], onDelete: Cascade)
+}
+
+model TechProject {
+    id     String    @id @default(cuid())
+    name   String
+    url    String?
+    techId String
+    tech   TechStack @relation(fields: [techId], references: [id], onDelete: Cascade)
+}
+
+enum LearnStage {
+    WantToLearn
+    CurrentlyLearning
+    BuildingWith
+    Comfortable
+}
