@@ -127,21 +127,6 @@ prisma/            schema.prisma, seed.ts
 
 ---
 
-## 🌐 Deploy to Vercel
-
-```bash
-# Push to GitHub first
-git init && git add . && git commit -m "init"
-gh repo create dsa-learning-os --public --push
-```
-
-Then on [vercel.com](https://vercel.com):
-1. Import the repo
-2. Add all env vars from `.env.local`
-3. Update GitHub OAuth callback to: `https://your-app.vercel.app/api/auth/callback/github`
-4. Deploy
-
----
 
 ## 🔮 What to Build Next (v2)
 
