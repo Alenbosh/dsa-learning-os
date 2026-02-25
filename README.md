@@ -1,138 +1,156 @@
-# 🧠 DSA Learning OS
+# DSA Learning OS
 
-A personal full-stack dashboard to track LeetCode problems, DSA study topics, and your tech stack learning pipeline. Built with Next.js 14, Supabase, Prisma, and NextAuth.
+A personal learning dashboard for tracking LeetCode progress, mastering DSA topics, and building a consistent study habit — built with Next.js, Prisma, and Supabase.
+
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
+![Prisma](https://img.shields.io/badge/Prisma-5-2D3748?logo=prisma)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?logo=tailwindcss)
 
 ---
 
-## ✅ What's Included
+## Features
 
-| Module | Features |
+**LeetCode Tracker** — log every problem you solve with difficulty, time taken, patterns, mistakes, and confidence. Tag by topic, flag for revisit, and sync directly from LeetCode.
+
+**DSA Study Board** — a Kanban board to manage your DSA topics across four stages: Not Started, In Progress, Needs Revision, and Done. Drag cards between columns and attach notes and resources to each topic.
+
+**Problem–Topic Linking** — link any LeetCode problem directly to one or more DSA topics. See exactly which problems reinforce which concepts.
+
+**Spaced Repetition (SM-2)** — uses the SM-2 algorithm to automatically schedule topic reviews. Rate your recall (0–5) after each session and the next review date is calculated for you. Due topics surface on the dashboard every day.
+
+**Weekly Review** — a dedicated page showing your week-by-week activity: problems solved by day, topics reviewed, average SM-2 rating, and a full problem list. Navigate backwards through any previous week.
+
+**Tech Stack Tracker** — track technologies you want to learn, are currently learning, or are comfortable with. Attach resources and projects to each entry.
+
+**Activity Heatmap** — GitHub-style solve heatmap to visualise your consistency over the past year.
+
+**Solve Streak** — tracks your current daily solving streak.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
 |---|---|
-| **LeetCode Tracker** | Problems table, difficulty/tag filters, 4 views, notes editor (Tiptap with syntax highlighting) |
-| **DSA Study Board** | Kanban board with drag-and-drop, topic notes, revision queue on dashboard |
-| **Tech Stack** | 4-stage learning pipeline (kanban), resources per tech, confidence tracking |
-| **Dashboard** | Stats overview, GitHub-style solve heatmap, revision queue, streak counter |
-| **Auth** | GitHub + Google OAuth via NextAuth, per-user data isolation |
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Database | PostgreSQL via Supabase |
+| ORM | Prisma |
+| Auth | NextAuth.js (Google OAuth) |
+| Styling | Tailwind CSS |
+| Rich Text | Tiptap |
+| Drag & Drop | @hello-pangea/dnd |
+| State | Zustand + SWR |
 
 ---
 
-## 🚀 Setup (30 minutes)
+## Getting Started
 
-### 1. Create the Next.js project
+### Prerequisites
+
+- Node.js 18+
+- A [Supabase](https://supabase.com) project (PostgreSQL)
+- A Google OAuth app ([console.cloud.google.com](https://console.cloud.google.com))
+
+### Installation
 
 ```bash
-npx create-next-app@latest dsa-learning-os \
-  --typescript --tailwind --eslint --app \
-  --src-dir=false --import-alias="@/*"
-
+git clone https://github.com/your-username/dsa-learning-os.git
 cd dsa-learning-os
+npm install
 ```
 
-### 2. Copy all files from this scaffold into the project root
+### Environment Variables
 
-The scaffold files map directly to the project structure. Copy them over, replacing the default `app/` and adding `components/`, `lib/`, `types/`, `prisma/`.
+Create a `.env` file in the root:
 
-### 3. Install dependencies
+```env
+DATABASE_URL=your_supabase_connection_string
+DIRECT_URL=your_supabase_direct_connection_string
 
-```bash
-npm install @prisma/client @supabase/supabase-js \
-  next-auth@^4.24.7 "@auth/prisma-adapter" \
-  @tiptap/react @tiptap/pm @tiptap/starter-kit \
-  @tiptap/extension-placeholder \
-  @tiptap/extension-code-block-lowlight lowlight \
-  @hello-pangea/dnd swr zustand \
-  react-calendar-heatmap react-tooltip \
-  date-fns clsx tailwind-merge lucide-react \
-  class-variance-authority react-hot-toast
+NEXTAUTH_SECRET=your_random_secret
+NEXTAUTH_URL=http://localhost:3000
 
-npm install -D prisma ts-node @tailwindcss/typography \
-  @types/react-calendar-heatmap
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
 ```
 
-### 4. Set up Supabase
-
-1. Go to [supabase.com](https://supabase.com) → New project
-2. Go to **Project Settings → Database → Connection String**
-3. Copy the **Transaction** URL (port 6543) → `DATABASE_URL`
-4. Copy the **Session** URL (port 5432) → `DIRECT_URL`
-5. Go to **Project Settings → API** → copy URL and anon key
-
-### 5. Set up GitHub OAuth
-
-1. Go to [github.com/settings/developers](https://github.com/settings/developers)
-2. **New OAuth App**:
-   - Homepage URL: `http://localhost:3000`
-   - Callback URL: `http://localhost:3000/api/auth/callback/github`
-3. Copy Client ID and Secret
-
-### 6. Create `.env.local`
+### Database Setup
 
 ```bash
-cp .env.local.example .env.local
-# Fill in all values from steps 4 and 5
+# Apply migrations
+npx prisma migrate dev --name init
 
-# Generate NEXTAUTH_SECRET:
-openssl rand -base64 32
-```
-
-### 7. Push schema and seed
-
-```bash
-npx prisma generate
-npx prisma db push
+# (Optional) seed default DSA topics
 npm run db:seed
+
+# Open Prisma Studio to inspect data
+npm run db:studio
 ```
 
-### 8. Run
+### Run
 
 ```bash
 npm run dev
-# Open http://localhost:3000
 ```
+
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## 📁 File Structure
+## Project Structure
 
 ```
 app/
-├── (app)/              # Auth-protected routes
-│   ├── layout.tsx      # Sidebar + Topbar shell
-│   ├── page.tsx        # Dashboard
-│   ├── leetcode/
-│   │   ├── page.tsx
-│   │   └── [id]/page.tsx
-│   ├── dsa/page.tsx
-│   └── techstack/page.tsx
-├── api/
-│   ├── auth/[...nextauth]/route.ts
-│   ├── problems/route.ts + [id]/route.ts
-│   ├── topics/route.ts + [id]/route.ts
-│   └── techstack/route.ts + [id]/route.ts
-└── auth/signin/page.tsx
-
+├── (app)/              # Authenticated app routes
+│   ├── page.tsx        # Dashboard / Home
+│   ├── leetcode/       # LeetCode tracker
+│   ├── dsa/            # DSA Study Board
+│   ├── review/         # Weekly Review
+│   ├── techstack/      # Tech Stack tracker
+│   └── settings/       # Settings & LeetCode sync
+├── api/                # API routes
+│   ├── problems/
+│   ├── topics/
+│   ├── review/         # SM-2 spaced repetition
+│   ├── weekly-review/
+│   └── techstack/
 components/
-├── layout/        Sidebar, Topbar
-├── leetcode/      ProblemsClient, ProblemsTable, ProblemModal,
-│                  ProblemDetail, NotesEditor, SolveHeatmap
-├── dsa/           DsaBoardClient, TopicCard, TopicModal, RevisionQueue
-├── techstack/     TechStackClient, TechCard, TechModal
-├── shared/        StatsCard
-└── providers/     SessionProvider
-
-lib/               prisma.ts, auth.ts, utils.ts
-types/             index.ts
-prisma/            schema.prisma, seed.ts
+├── dsa/                # DSA board components + SpacedRepetitionQueue
+├── leetcode/           # Problem table, modal, heatmap
+├── review/             # WeeklyReviewClient
+├── layout/             # Sidebar, Topbar
+└── shared/             # StatsCard
+prisma/
+└── schema.prisma       # Full DB schema
 ```
 
 ---
 
+## Scripts
 
-## 🔮 What to Build Next (v2)
+```bash
+npm run dev          # Start dev server
+npm run build        # Generate Prisma client + build
+npm run db:push      # Push schema changes without migration
+npm run db:studio    # Open Prisma Studio
+npm run db:seed      # Seed default topics
+```
 
-- **Topic detail page** — `/dsa/[id]` with Tiptap notes + linked problems list
-- **Problem-Topic linking** — link LeetCode problems directly to DSA topics
-- **Spaced repetition** — SM-2 algorithm to auto-schedule revision
-- **Weekly review** — summary page with stats per week
-- **AI hints** — call Claude API for contextual problem hints
-- **LeetCode URL autofill** — scrape problem title/difficulty from URL on paste
+---
+
+## Roadmap
+
+- [ ] Mobile app (React Native)
+- [ ] Problem notes with code blocks (Tiptap editor)
+- [ ] LeetCode contest tracker
+- [ ] Export progress as PDF
+- [ ] Dark/light theme toggle
+- [ ] Shared profiles / leaderboard
+
+---
+
+## License
+
+MIT
