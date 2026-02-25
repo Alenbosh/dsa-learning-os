@@ -62,7 +62,7 @@ export async function PATCH(
     data: { ...data, ...tagsUpdate, ...topicsUpdate },
     include: {
       tags: { include: { tag: true } },
-      topicLinks: { topicId: true },
+      topicLinks: { include: { topic: true } },
     },
   });
 
