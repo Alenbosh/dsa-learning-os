@@ -8,9 +8,11 @@ import { useState } from "react"
 import {
     LayoutDashboard, Code2, Brain, Layers,
     LogOut, ChevronRight, Settings, ExternalLink,
-    ChevronDown, ChevronUp, Home, Menu, X, CalendarDays
+    ChevronDown, ChevronUp, Home, Menu, X, CalendarDays,
+    Sun, Moon
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useTheme } from "@/components/providers/ThemeProvider"
 
 const NAV = [
     { href: "/", label: "Home", icon: Home },
@@ -32,6 +34,7 @@ const EXTERNAL_LINKS = [
 function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) {
     const pathname = usePathname()
     const [externalOpen, setExternalOpen] = useState(true)
+    const { theme, toggle } = useTheme()
 
     return (
         <div className="flex flex-col h-full">
@@ -108,7 +111,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
             <div className="flex-1" />
 
             {/* User */}
-            <div className="border-t border-zinc-800 p-3">
+            <div className="border-t border-zinc-800 dark:border-zinc-800 p-3">
                 <div className="flex items-center gap-2.5 px-2 py-1.5 rounded-lg">
                     {user?.image ? (
                         <Image
@@ -127,6 +130,13 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                         <div className="text-xs font-medium truncate">{user?.name}</div>
                         <div className="text-[10px] text-zinc-500 truncate">{user?.email}</div>
                     </div>
+                    <button
+                        onClick={toggle}
+                        className="p-1 text-zinc-600 hover:text-zinc-300 transition-colors"
+                        title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                    >
+                        {theme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+                    </button>
                     <button
                         onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                         className="p-1 text-zinc-600 hover:text-zinc-300 transition-colors"

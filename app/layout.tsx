@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { SessionProvider } from "@/components/providers/SessionProvider"
+import { ThemeProvider } from "@/components/providers/ThemeProvider"
 import { Toaster } from "react-hot-toast"
 import "./globals.css"
 
@@ -30,22 +31,24 @@ export default async function RootLayout({
 
     return (
         <html lang="en" className="dark">
-            <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#0c0c0e] text-zinc-100`}>
-                <SessionProvider session={session}>
-                    {children}
-                    <Toaster
-                        position="bottom-right"
-                        toastOptions={{
-                            style: {
-                                background: "#18181b",
-                                color: "#f4f4f5",
-                                border: "1px solid #27272a",
-                                fontFamily: "var(--font-inter)",
-                                fontSize: "13px",
-                            },
-                        }}
-                    />
-                </SessionProvider>
+            <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+                <ThemeProvider>
+                    <SessionProvider session={session}>
+                        {children}
+                        <Toaster
+                            position="bottom-right"
+                            toastOptions={{
+                                style: {
+                                    background: "#18181b",
+                                    color: "#f4f4f5",
+                                    border: "1px solid #27272a",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "13px",
+                                },
+                            }}
+                        />
+                    </SessionProvider>
+                </ThemeProvider>
             </body>
         </html>
     )
