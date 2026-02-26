@@ -60,7 +60,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-32 text-zinc-600">
+            <div className="flex items-center justify-center h-32 text-zinc-600 dark:text-zinc-600">
                 <Loader2 size={18} className="animate-spin mr-2" /> Loading due reviews…
             </div>
         )
@@ -68,7 +68,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
     if (total === 0) {
         return (
-            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-600">
+            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-600 dark:text-zinc-600">
                 <CheckCircle2 size={22} className="text-emerald-500" />
                 <span className="text-sm">All caught up! No reviews due.</span>
             </div>
@@ -77,9 +77,9 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
     if (sessionDone) {
         return (
-            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-500">
+            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-600 dark:text-zinc-500">
                 <CheckCircle2 size={22} className="text-emerald-500" />
-                <span className="text-sm font-semibold text-zinc-300">Session complete! {total} topics reviewed.</span>
+                <span className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Session complete! {total} topics reviewed.</span>
                 <button onClick={() => { setCurrentIdx(0); setSessionDone(false); setRevealed(false) }}
                     className="text-xs text-orange-400 hover:text-orange-300 mt-1">Review again</button>
             </div>
@@ -89,37 +89,37 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
     return (
         <div className="space-y-4">
             {/* Progress bar */}
-            <div className="flex items-center justify-between text-xs text-zinc-500 mb-1">
+            <div className="flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-500 mb-1">
                 <span>{currentIdx + 1} of {total} due</span>
                 <span className="flex items-center gap-1"><Clock size={10} /> today</span>
             </div>
-            <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
+            <div className="w-full h-1 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                 <div className="h-full bg-orange-500 rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
             </div>
 
             {/* Card */}
-            <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 space-y-3">
+            <div className="bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-3">
                 <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold text-sm">{current.name}</h3>
                     <span className={cn("text-[10px] px-2 py-0.5 rounded-full border font-mono shrink-0",
-                        current.sm2Repetition === 0 ? "text-zinc-500 bg-zinc-800 border-zinc-700" : "text-blue-400 bg-blue-400/10 border-blue-400/20"
+                        current.sm2Repetition === 0 ? "text-zinc-600 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 border-zinc-300 dark:border-zinc-700" : "text-blue-400 bg-blue-400/10 border-blue-400/20"
                     )}>
                         {current.sm2Repetition === 0 ? "New" : `Rep ${current.sm2Repetition}`}
                     </span>
                 </div>
 
                 {current.notes && (
-                    <p className={cn("text-xs text-zinc-500 transition-all", revealed ? "opacity-100" : "opacity-0 select-none blur-sm")}>
+                    <p className={cn("text-xs text-zinc-600 dark:text-zinc-500 transition-all", revealed ? "opacity-100" : "opacity-0 select-none blur-sm")}>
                         {current.notes}
                     </p>
                 )}
 
                 {current.problems?.length > 0 && revealed && (
                     <div className="space-y-1">
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-600">Linked Problems</p>
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600">Linked Problems</p>
                         <div className="flex flex-wrap gap-1.5">
                             {current.problems.slice(0, 4).map(({ problem }: any) => (
-                                <span key={problem.id} className="text-[11px] px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded font-mono">
+                                <span key={problem.id} className="text-[11px] px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 rounded font-mono">
                                     {problem.name}
                                 </span>
                             ))}
@@ -129,12 +129,12 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
                 {!revealed ? (
                     <button onClick={() => setRevealed(true)}
-                        className="w-full py-2 text-xs font-medium text-zinc-400 border border-dashed border-zinc-700 rounded-lg hover:border-zinc-500 hover:text-zinc-200 transition-all">
+                        className="w-full py-2 text-xs font-medium text-zinc-600 dark:text-zinc-400 border border-dashed border-zinc-300 dark:border-zinc-700 rounded-lg hover:border-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-all">
                         Show notes & rate →
                     </button>
                 ) : (
                     <div className="space-y-2 pt-1">
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-600">How well did you recall this?</p>
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600">How well did you recall this?</p>
                         <div className="grid grid-cols-3 gap-1.5">
                             {QUALITY_LABELS.map(({ value, label, color }) => (
                                 <button key={value} onClick={() => handleRate(value)} disabled={submitting}

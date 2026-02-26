@@ -51,10 +51,10 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white dark:bg-zinc-900 z-10">
           <h2 className="font-bold text-sm">{isEdit ? "Edit Technology" : "Add Technology"}</h2>
-          <button onClick={onClose} className="p-1.5 hover:bg-zinc-800 rounded-lg transition-colors">
+          <button onClick={onClose} className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors">
             <X size={14} />
           </button>
         </div>
@@ -127,14 +127,14 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
             <label className="field-label">Learning Resources</label>
             <div className="space-y-1.5">
               {resources.map((r, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2">
+                <div key={i} className="flex items-center gap-2 text-xs bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2">
                   <a href={r.url} target="_blank" rel="noreferrer" className="flex-1 truncate hover:text-orange-400 transition-colors">
                     {r.title}
                   </a>
                   <button
                     type="button"
                     onClick={() => setResources(resources.filter((_, j) => j !== i))}
-                    className="text-zinc-700 hover:text-rose-400 transition-colors"
+                    className="text-zinc-500 dark:text-zinc-700 hover:text-rose-400 transition-colors"
                   >
                     ✕
                   </button>
@@ -162,14 +162,14 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
                     setNewResource({ title: "", url: "" })
                   }
                 }}
-                className="p-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors text-zinc-400"
+                className="p-1.5 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg transition-colors text-zinc-600 dark:text-zinc-400"
               >
                 <Plus size={14} />
               </button>
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-2 border-t border-zinc-800">
+          <div className="flex items-center justify-between pt-2 border-t border-zinc-200 dark:border-zinc-800">
             {isEdit ? (
               <button
                 type="button"
@@ -189,7 +189,7 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
               </button>
             ) : <div />}
             <div className="flex gap-3">
-              <button type="button" onClick={onClose} className="text-sm text-zinc-500 hover:text-zinc-300 px-3 py-2">Cancel</button>
+              <button type="button" onClick={onClose} className="text-sm text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 px-3 py-2">Cancel</button>
               <button
                 type="submit"
                 disabled={saving}
@@ -204,11 +204,16 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
       </div>
 
       <style jsx global>{`
-        .field-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #71717a; margin-bottom: 4px; }
-        .field-input { width: 100%; background: #09090b; border: 1px solid #27272a; border-radius: 8px; padding: 8px 12px; color: #f4f4f5; font-size: 13px; outline: none; transition: border-color 0.15s; font-family: inherit; }
-        .field-input:focus { border-color: #52525b; }
-        .field-input::placeholder { color: #3f3f46; }
-        select.field-input option { background: #18181b; }
+        .field-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #52525b; margin-bottom: 4px; }
+        .field-input { width: 100%; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 8px; padding: 8px 12px; color: #18181b; font-size: 13px; outline: none; transition: border-color 0.15s; font-family: inherit; }
+        .field-input:focus { border-color: #a1a1aa; }
+        .field-input::placeholder { color: #a1a1aa; }
+        select.field-input option { background: #ffffff; color: #18181b; }
+        html.dark .field-label { color: #71717a; }
+        html.dark .field-input { background: #09090b; border-color: #27272a; color: #f4f4f5; }
+        html.dark .field-input:focus { border-color: #52525b; }
+        html.dark .field-input::placeholder { color: #3f3f46; }
+        html.dark select.field-input option { background: #18181b; color: #f4f4f5; }
       `}</style>
     </div>
   )

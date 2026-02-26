@@ -28,16 +28,16 @@ export function StatsCard({ label, value, icon, sub, color = "zinc", href }: Sta
     <Wrapper
       href={href as string}
       className={cn(
-        "group p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl",
-        href && "hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-150 cursor-pointer"
+        "group p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl",
+        href && "hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-150 cursor-pointer"
       )}
     >
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs text-zinc-500 font-medium">{label}</span>
+        <span className="text-xs text-zinc-600 dark:text-zinc-500 font-medium">{label}</span>
         <div className={cn("p-1.5 rounded-md", COLOR_MAP[color])}>{icon}</div>
       </div>
       <div className="text-2xl font-bold tracking-tight font-mono">{value}</div>
-      {sub && <div className="text-[11px] text-zinc-500 mt-1">{sub}</div>}
+      {sub && <div className="text-[11px] text-zinc-600 dark:text-zinc-500 mt-1">{sub}</div>}
     </Wrapper>
   )
 }

@@ -25,7 +25,7 @@ export default function SignInPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#0c0c0e] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-zinc-50 dark:bg-[#0c0c0e] flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="flex flex-col items-center mb-10">
@@ -33,12 +33,12 @@ export default function SignInPage() {
             <Code2 size={22} className="text-white" />
           </div>
           <h1 className="text-xl font-bold">DSA Learning OS</h1>
-          <p className="text-sm text-zinc-500 mt-1">Track your DSA journey</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-500 mt-1">Track your DSA journey</p>
         </div>
 
         {/* Card */}
-        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 space-y-3">
-          <p className="text-sm text-zinc-500 text-center mb-5">
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-3">
+          <p className="text-sm text-zinc-600 dark:text-zinc-500 text-center mb-5">
             Sign in to sync your data across devices
           </p>
 
@@ -62,7 +62,7 @@ export default function SignInPage() {
             })}
         </div>
 
-        <p className="text-center text-xs text-zinc-700 mt-6">
+        <p className="text-center text-xs text-zinc-500 dark:text-zinc-700 mt-6">
           Your data is private and only accessible by you
         </p>
       </div>

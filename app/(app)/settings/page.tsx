@@ -16,7 +16,7 @@ export default async function SettingsPage() {
         <div className="max-w-2xl space-y-8">
             <div>
                 <h1 className="text-xl font-bold tracking-tight">Settings</h1>
-                <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-1">Manage your account and integrations</p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-500 mt-1">Manage your account and integrations</p>
             </div>
             <LeetCodeSyncClient user={user} />
         </div>

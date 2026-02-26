@@ -68,7 +68,7 @@ export function TechStackClient({ initialStack }: { initialStack: any[] }) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold">Tech Stack Roadmap</h1>
-          <p className="text-xs text-zinc-500 mt-0.5">{stack.length} technologies tracked</p>
+          <p className="text-xs text-zinc-600 dark:text-zinc-500 mt-0.5">{stack.length} technologies tracked</p>
         </div>
         <button
           onClick={() => { setEditingTech(null); setModalOpen(true) }}
@@ -83,7 +83,7 @@ export function TechStackClient({ initialStack }: { initialStack: any[] }) {
         {COLUMNS.map((col) => (
           <div
             key={col.stage}
-            className="bg-zinc-900/40 border border-zinc-800 rounded-xl p-3"
+            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               const id = e.dataTransfer.getData("techId")
@@ -97,7 +97,7 @@ export function TechStackClient({ initialStack }: { initialStack: any[] }) {
                   {STAGE_LABELS[col.stage]}
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-zinc-600 bg-zinc-800 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono text-zinc-600 dark:text-zinc-600 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full">
                 {byStage(col.stage).length}
               </span>
             </div>
@@ -112,7 +112,7 @@ export function TechStackClient({ initialStack }: { initialStack: any[] }) {
                 />
               ))}
               {byStage(col.stage).length === 0 && (
-                <div className="flex items-center justify-center h-16 text-zinc-700 text-xs border border-dashed border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-center h-16 text-zinc-500 dark:text-zinc-700 text-xs border border-dashed border-zinc-300 dark:border-zinc-800 rounded-lg">
                   Drop here
                 </div>
               )}

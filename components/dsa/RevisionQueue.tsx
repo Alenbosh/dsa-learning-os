@@ -6,7 +6,7 @@ import type { ProblemWithTags } from "@/types"
 export function RevisionQueue({ problems }: { problems: ProblemWithTags[] }) {
   if (!problems.length) {
     return (
-      <div className="flex flex-col items-center justify-center h-24 text-zinc-600 text-xs">
+      <div className="flex flex-col items-center justify-center h-24 text-zinc-600 dark:text-zinc-600 text-xs">
         <span className="text-2xl mb-2">🎉</span>
         Nothing to revise!
       </div>
@@ -16,7 +16,7 @@ export function RevisionQueue({ problems }: { problems: ProblemWithTags[] }) {
   return (
     <div className="space-y-2">
       {problems.map((p) => (
-        <div key={p.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-zinc-950/50 border border-zinc-800 hover:border-zinc-700 transition-colors group">
+        <div key={p.id} className="flex items-center gap-3 p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors group">
           <span className={cn("text-[10px] font-bold px-1.5 py-0.5 rounded border shrink-0", DIFFICULTY_COLORS[p.difficulty])}>
             {p.difficulty[0]}
           </span>
@@ -24,14 +24,14 @@ export function RevisionQueue({ problems }: { problems: ProblemWithTags[] }) {
             {p.name}
           </Link>
           {p.url && (
-            <a href={p.url} target="_blank" rel="noreferrer" className="opacity-0 group-hover:opacity-100 text-zinc-600 hover:text-zinc-300 transition-all">
+            <a href={p.url} target="_blank" rel="noreferrer" className="opacity-0 group-hover:opacity-100 text-zinc-500 dark:text-zinc-600 hover:text-zinc-900 dark:hover:text-zinc-300 transition-all">
               <ExternalLink size={11} />
             </a>
           )}
         </div>
       ))}
       {problems.length > 0 && (
-        <Link href="/leetcode?filter=revisit" className="block text-center text-[11px] text-zinc-600 hover:text-orange-400 transition-colors pt-1">
+        <Link href="/leetcode?filter=revisit" className="block text-center text-[11px] text-zinc-600 dark:text-zinc-600 hover:text-orange-400 transition-colors pt-1">
           View all →
         </Link>
       )}

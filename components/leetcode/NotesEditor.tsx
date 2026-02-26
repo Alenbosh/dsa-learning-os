@@ -53,12 +53,12 @@ export function NotesEditor({ content, onChange, placeholder }: NotesEditorProps
   ]
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl overflow-hidden focus-within:border-zinc-700 transition-colors">
+    <div className="bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden focus-within:border-zinc-300 dark:focus-within:border-zinc-700 transition-colors">
       {/* Toolbar */}
-      <div className="flex items-center gap-0.5 px-3 py-2 border-b border-zinc-800 bg-zinc-950/50 flex-wrap">
+      <div className="flex items-center gap-0.5 px-3 py-2 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/50 flex-wrap">
         {tools.map((tool, i) =>
           tool === null ? (
-            <div key={i} className="w-px h-4 bg-zinc-800 mx-1" />
+            <div key={i} className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
           ) : (
             <button
               key={i}
@@ -69,7 +69,7 @@ export function NotesEditor({ content, onChange, placeholder }: NotesEditorProps
                 "p-1.5 rounded transition-colors",
                 tool.active
                   ? "bg-orange-500/20 text-orange-400"
-                  : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"
+                  : "text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800"
               )}
             >
               <tool.icon size={13} />
@@ -78,7 +78,7 @@ export function NotesEditor({ content, onChange, placeholder }: NotesEditorProps
         )}
 
         {/* Code block button */}
-        <div className="w-px h-4 bg-zinc-800 mx-1" />
+        <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-1" />
         <button
           type="button"
           title="Code Block"
@@ -87,7 +87,7 @@ export function NotesEditor({ content, onChange, placeholder }: NotesEditorProps
             "px-2 py-1 rounded text-[10px] font-mono transition-colors",
             editor.isActive("codeBlock")
               ? "bg-orange-500/20 text-orange-400"
-              : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"
+              : "text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800"
           )}
         >
           {"</>"}

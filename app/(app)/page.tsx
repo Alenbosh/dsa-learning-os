@@ -54,7 +54,7 @@ export default async function DashboardPage() {
                 <h1 className="text-2xl font-bold tracking-tight">
                     Good {getGreeting()}, {session!.user?.name?.split(" ")[0]} 👋
                 </h1>
-                <p className="text-zinc-500 text-sm mt-1">Here's your learning progress</p>
+                <p className="text-zinc-600 dark:text-zinc-500 text-sm mt-1">Here's your learning progress</p>
             </div>
 
             {/* Stats Grid */}
@@ -93,7 +93,7 @@ export default async function DashboardPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Heatmap */}
-                <div className="lg:col-span-2 bg-zinc-900/50 border border-zinc-800 rounded-xl p-5">
+                <div className="lg:col-span-2 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5">
                     <div className="flex items-center gap-2 mb-4">
                         <TrendingUp size={15} className="text-orange-400" />
                         <span className="text-sm font-semibold">Solve Activity</span>
@@ -102,7 +102,7 @@ export default async function DashboardPage() {
                 </div>
 
                 {/* Revision Queue */}
-                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-5">
+                <div className="bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5">
                     <div className="flex items-center gap-2 mb-4">
                         <BookOpen size={15} className="text-amber-400" />
                         <span className="text-sm font-semibold">Revision Queue</span>
@@ -114,7 +114,7 @@ export default async function DashboardPage() {
             {/* Spaced Repetition + Quick Links */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* SM-2 Review */}
-                <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-5">
+                <div className="bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
                             <Zap size={15} className="text-purple-400" />
@@ -145,11 +145,11 @@ function QuickLink({ href, icon, title, desc }: {
     href: string; icon: React.ReactNode; title: string; desc: string
 }) {
     return (
-        <a href={href} className="group flex items-center gap-4 p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-zinc-700 hover:bg-zinc-900 transition-all duration-150">
-            <div className="p-2.5 bg-zinc-800 rounded-lg group-hover:bg-zinc-700 transition-colors">{icon}</div>
+        <a href={href} className="group flex items-center gap-4 p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-150">
+            <div className="p-2.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-colors">{icon}</div>
             <div>
                 <div className="font-semibold text-sm">{title}</div>
-                <div className="text-xs text-zinc-500">{desc}</div>
+                <div className="text-xs text-zinc-600 dark:text-zinc-500">{desc}</div>
             </div>
         </a>
     )

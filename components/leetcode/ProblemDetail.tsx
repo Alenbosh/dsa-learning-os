@@ -34,7 +34,7 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
   return (
     <div className="max-w-4xl space-y-6">
       {/* Breadcrumb */}
-      <Link href="/leetcode" className="inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-300 transition-colors">
+      <Link href="/leetcode" className="inline-flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors">
         <ArrowLeft size={13} />
         Back to Problems
       </Link>
@@ -77,7 +77,7 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all shrink-0",
             dirty
               ? "bg-orange-500 hover:bg-orange-400 text-white"
-              : "bg-zinc-800 text-zinc-600 cursor-not-allowed"
+              : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-600 cursor-not-allowed"
           )}
         >
           {saving ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />}
@@ -98,11 +98,11 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
         <MetaCard label="Solved" value={problem.solved?.replace("FullSolution", "Full Solution") ?? "—"} />
         <MetaCard label="Rating" value={problem.rating?.toString() ?? "—"} />
         {problem.tags.length > 0 && (
-          <div className="col-span-2 p-3 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-            <div className="text-[10px] uppercase tracking-wider text-zinc-600 mb-2">Tags</div>
+          <div className="col-span-2 p-3 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+            <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-2">Tags</div>
             <div className="flex flex-wrap gap-1.5">
               {problem.tags.map(({ tag }) => (
-                <span key={tag.id} className="text-[11px] font-mono px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded">
+                <span key={tag.id} className="text-[11px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 rounded">
                   {tag.name}
                 </span>
               ))}
@@ -115,15 +115,15 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
       {(problem.pattern || problem.mistake) && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {problem.pattern && (
-            <div className="p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl">
-              <div className="text-[10px] uppercase tracking-wider text-zinc-600 mb-2">💡 Pattern / Core Idea</div>
-              <p className="text-sm text-zinc-300 leading-relaxed">{problem.pattern}</p>
+            <div className="p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+              <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-2">💡 Pattern / Core Idea</div>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{problem.pattern}</p>
             </div>
           )}
           {problem.mistake && (
             <div className="p-4 bg-rose-950/20 border border-rose-900/30 rounded-xl">
               <div className="text-[10px] uppercase tracking-wider text-rose-600 mb-2">⚠️ Mistake Made</div>
-              <p className="text-sm text-zinc-300 leading-relaxed">{problem.mistake}</p>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{problem.mistake}</p>
             </div>
           )}
         </div>
@@ -150,8 +150,8 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
 
 function MetaCard({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
-    <div className="p-3 bg-zinc-900/50 border border-zinc-800 rounded-lg">
-      <div className="text-[10px] uppercase tracking-wider text-zinc-600 mb-1">{label}</div>
+    <div className="p-3 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg">
+      <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-1">{label}</div>
       <div className={cn("text-sm font-medium", mono && "font-mono text-orange-400")}>{value}</div>
     </div>
   )

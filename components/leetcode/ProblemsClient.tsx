@@ -86,7 +86,7 @@ export function ProblemsClient({
           <span className="text-amber-400">{counts.medium}M</span>
           <span className="text-rose-400">{counts.hard}H</span>
           <span className="text-zinc-600">·</span>
-          <span className="text-zinc-400">{problems.length} total</span>
+          <span className="text-zinc-600 dark:text-zinc-400">{problems.length} total</span>
         </div>
         <button
           onClick={openAdd}
@@ -99,7 +99,7 @@ export function ProblemsClient({
       </div>
 
       {/* View tabs */}
-      <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-lg p-1 w-fit">
+      <div className="flex items-center gap-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg p-1 w-fit">
         {VIEWS.map((v) => (
           <button
             key={v.id}
@@ -107,8 +107,8 @@ export function ProblemsClient({
             className={cn(
               "px-3 py-1.5 rounded-md text-xs font-medium transition-all",
               view === v.id
-                ? "bg-zinc-700 text-zinc-100"
-                : "text-zinc-500 hover:text-zinc-300"
+                ? "bg-zinc-200 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100"
+                : "text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300"
             )}
           >
             {v.emoji} {v.label}
@@ -119,21 +119,21 @@ export function ProblemsClient({
       {/* Filters */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative">
-          <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 dark:text-zinc-500" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search problems..."
-            className="pl-8 pr-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm
-                       placeholder-zinc-600 focus:outline-none focus:border-zinc-600 w-56"
+            className="pl-8 pr-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm
+                       placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600 w-56"
           />
         </div>
 
         <select
           value={diffFilter}
           onChange={(e) => setDiffFilter(e.target.value)}
-          className="px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm
-                     text-zinc-300 focus:outline-none focus:border-zinc-600"
+          className="px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm
+                     text-zinc-700 dark:text-zinc-300 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600"
         >
           <option value="">All Difficulty</option>
           <option value="Easy">Easy</option>
@@ -144,8 +144,8 @@ export function ProblemsClient({
         <select
           value={tagFilter}
           onChange={(e) => setTagFilter(e.target.value)}
-          className="px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm
-                     text-zinc-300 focus:outline-none focus:border-zinc-600"
+          className="px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg text-sm
+                     text-zinc-700 dark:text-zinc-300 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600"
         >
           <option value="">All Tags</option>
           {tags.map((t) => (
@@ -156,13 +156,13 @@ export function ProblemsClient({
         {(search || diffFilter || tagFilter) && (
           <button
             onClick={() => { setSearch(""); setDiffFilter(""); setTagFilter("") }}
-            className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+            className="text-xs text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
           >
             Clear filters
           </button>
         )}
 
-        <span className="text-xs text-zinc-600 ml-auto">{filtered.length} results</span>
+        <span className="text-xs text-zinc-600 dark:text-zinc-500 ml-auto">{filtered.length} results</span>
       </div>
 
       {/* Table */}

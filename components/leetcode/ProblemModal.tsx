@@ -109,10 +109,10 @@ export function ProblemModal({
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-                <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
+            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 sticky top-0 bg-white dark:bg-zinc-900 z-10">
                     <h2 className="font-bold text-base">{isEdit ? "Edit Problem" : "Add Problem"}</h2>
-                    <button onClick={onClose} className="p-1.5 hover:bg-zinc-800 rounded-lg transition-colors">
+                    <button onClick={onClose} className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors">
                         <X size={15} />
                     </button>
                 </div>
@@ -185,13 +185,13 @@ export function ProblemModal({
                     {/* Tags */}
                     <div className="space-y-2">
                         <label className="field-label">Topic Tags</label>
-                        <div className="flex flex-wrap gap-1.5 p-3 bg-zinc-950 border border-zinc-800 rounded-lg">
+                        <div className="flex flex-wrap gap-1.5 p-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg">
                             {tags.map((tag) => (
                                 <button key={tag.id} type="button" onClick={() => toggleTag(tag.id)}
                                     className={cn("px-2.5 py-1 rounded text-[11px] font-mono transition-all border",
                                         form.tagIds.includes(tag.id)
                                             ? "bg-orange-500/15 text-orange-400 border-orange-500/30"
-                                            : "bg-zinc-800 text-zinc-500 border-transparent hover:border-zinc-600"
+                                            : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-500 border-transparent hover:border-zinc-300 dark:hover:border-zinc-600"
                                     )}>
                                     {tag.name}
                                 </button>
@@ -206,20 +206,20 @@ export function ProblemModal({
                                 <Link2 size={11} />
                                 Link to DSA Topics
                             </label>
-                            <div className="flex flex-wrap gap-1.5 p-3 bg-zinc-950 border border-zinc-800 rounded-lg">
+                            <div className="flex flex-wrap gap-1.5 p-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg">
                                 {topics.map((topic) => (
                                     <button key={topic.id} type="button" onClick={() => toggleTopic(topic.id)}
                                         className={cn("px-2.5 py-1 rounded text-[11px] font-medium transition-all border",
                                             form.topicIds.includes(topic.id)
                                                 ? "bg-blue-500/15 text-blue-400 border-blue-500/30"
-                                                : "bg-zinc-800 text-zinc-500 border-transparent hover:border-zinc-600"
+                                                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-500 border-transparent hover:border-zinc-300 dark:hover:border-zinc-600"
                                         )}>
                                         {topic.name}
                                     </button>
                                 ))}
                             </div>
                             {form.topicIds.length > 0 && (
-                                <p className="text-[10px] text-zinc-600">{form.topicIds.length} topic{form.topicIds.length > 1 ? "s" : ""} linked</p>
+                                <p className="text-[10px] text-zinc-600 dark:text-zinc-600">{form.topicIds.length} topic{form.topicIds.length > 1 ? "s" : ""} linked</p>
                             )}
                         </div>
                     )}
@@ -240,16 +240,16 @@ export function ProblemModal({
                     <div className="flex gap-4">
                         <label className="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" checked={form.isContest} onChange={(e) => setForm({ ...form, isContest: e.target.checked })} className="accent-orange-500 w-4 h-4" />
-                            <span className="text-sm text-zinc-400">Contest Problem</span>
+                            <span className="text-sm text-zinc-700 dark:text-zinc-400">Contest Problem</span>
                         </label>
                         <label className="flex items-center gap-2 cursor-pointer">
                             <input type="checkbox" checked={form.revisit} onChange={(e) => setForm({ ...form, revisit: e.target.checked })} className="accent-rose-500 w-4 h-4" />
-                            <span className="text-sm text-zinc-400">Needs Revisit</span>
+                            <span className="text-sm text-zinc-700 dark:text-zinc-400">Needs Revisit</span>
                         </label>
                     </div>
 
                     {/* Footer */}
-                    <div className="flex items-center justify-between pt-2 border-t border-zinc-800">
+                    <div className="flex items-center justify-between pt-2 border-t border-zinc-200 dark:border-zinc-800">
                         {isEdit ? (
                             <button type="button" onClick={handleDelete} disabled={deleting}
                                 className="flex items-center gap-1.5 text-xs text-rose-400 hover:text-rose-300 transition-colors">
@@ -258,7 +258,7 @@ export function ProblemModal({
                             </button>
                         ) : <div />}
                         <div className="flex gap-3">
-                            <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors">Cancel</button>
+                            <button type="button" onClick={onClose} className="px-4 py-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">Cancel</button>
                             <button type="submit" disabled={saving}
                                 className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50">
                                 {saving && <Loader2 size={13} className="animate-spin" />}
@@ -270,11 +270,16 @@ export function ProblemModal({
             </div>
 
             <style jsx global>{`
-        .field-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #71717a; margin-bottom: 4px; }
-        .field-input { width: 100%; background: #09090b; border: 1px solid #27272a; border-radius: 8px; padding: 8px 12px; color: #f4f4f5; font-size: 13px; outline: none; transition: border-color 0.15s; font-family: inherit; }
-        .field-input:focus { border-color: #52525b; }
-        .field-input::placeholder { color: #3f3f46; }
-        select.field-input option { background: #18181b; }
+        .field-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #52525b; margin-bottom: 4px; }
+        .field-input { width: 100%; background: #ffffff; border: 1px solid #e4e4e7; border-radius: 8px; padding: 8px 12px; color: #18181b; font-size: 13px; outline: none; transition: border-color 0.15s; font-family: inherit; }
+        .field-input:focus { border-color: #a1a1aa; }
+        .field-input::placeholder { color: #a1a1aa; }
+        select.field-input option { background: #ffffff; color: #18181b; }
+        html.dark .field-label { color: #71717a; }
+        html.dark .field-input { background: #09090b; border-color: #27272a; color: #f4f4f5; }
+        html.dark .field-input:focus { border-color: #52525b; }
+        html.dark .field-input::placeholder { color: #3f3f46; }
+        html.dark select.field-input option { background: #18181b; color: #f4f4f5; }
       `}</style>
         </div>
     )

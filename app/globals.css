@@ -9,29 +9,15 @@
   }
 
   * {
-    @apply border-zinc-800;
+    @apply border-zinc-200 dark:border-zinc-800;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* ── Dark mode (default) ── */
-  html.dark body {
-    @apply bg-[#0c0c0e] text-zinc-100;
-  }
-
-  /* ── Light mode ── */
-  html.light body {
-    @apply bg-zinc-50 text-zinc-900;
-  }
-
-  html.light * {
-    @apply border-zinc-200;
-  }
-
   body {
-    @apply bg-[#0c0c0e] text-zinc-100;
+    @apply bg-zinc-50 text-zinc-900 dark:bg-[#0c0c0e] dark:text-zinc-100;
   }
 
   ::-webkit-scrollbar {
@@ -44,15 +30,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-700 rounded-full;
-  }
-
-  html.light ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-300;
+    @apply bg-zinc-300 dark:bg-zinc-700 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-600;
+    @apply bg-zinc-400 dark:bg-zinc-600;
   }
 }
 

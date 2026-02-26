@@ -58,7 +58,7 @@ export function DsaBoardClient({ initialTopics }: { initialTopics: any[] }) {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold">DSA Study Board</h1>
-          <p className="text-xs text-zinc-500 mt-0.5">{topics.length} topics · drag cards between columns</p>
+          <p className="text-xs text-zinc-600 dark:text-zinc-500 mt-0.5">{topics.length} topics · drag cards between columns</p>
         </div>
         <button
           onClick={() => { setEditingTopic(null); setModalOpen(true) }}
@@ -74,7 +74,7 @@ export function DsaBoardClient({ initialTopics }: { initialTopics: any[] }) {
         {COLUMNS.map((col) => (
           <div
             key={col.status}
-            className="bg-zinc-900/40 border border-zinc-800 rounded-xl p-3"
+            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               const id = e.dataTransfer.getData("topicId")
@@ -85,7 +85,7 @@ export function DsaBoardClient({ initialTopics }: { initialTopics: any[] }) {
             <div className="flex items-center justify-between mb-3 px-1">
               <div className="flex items-center gap-2">
                 <span className="text-sm">{col.emoji}</span>
-                <span className="text-xs font-semibold text-zinc-400">{col.label}</span>
+                <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">{col.label}</span>
               </div>
               <span className={cn(
                 "text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border",
@@ -105,7 +105,7 @@ export function DsaBoardClient({ initialTopics }: { initialTopics: any[] }) {
                 />
               ))}
               {byStatus(col.status).length === 0 && (
-                <div className="flex items-center justify-center h-16 text-zinc-700 text-xs border border-dashed border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-center h-16 text-zinc-500 dark:text-zinc-700 text-xs border border-dashed border-zinc-300 dark:border-zinc-800 rounded-lg">
                   Drop here
                 </div>
               )}
