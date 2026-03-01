@@ -6,7 +6,7 @@ import type { ProblemWithTags } from "@/types"
 export function RevisionQueue({ problems }: { problems: ProblemWithTags[] }) {
   if (!problems.length) {
     return (
-      <div className="flex flex-col items-center justify-center h-24 text-zinc-600 dark:text-zinc-600 text-xs">
+      <div className="flex flex-col items-center justify-center h-24 text-zinc-600 dark:text-zinc-500 text-xs">
         <span className="text-2xl mb-2">🎉</span>
         Nothing to revise!
       </div>
@@ -31,7 +31,7 @@ export function RevisionQueue({ problems }: { problems: ProblemWithTags[] }) {
         </div>
       ))}
       {problems.length > 0 && (
-        <Link href="/leetcode?filter=revisit" className="block text-center text-[11px] text-zinc-600 dark:text-zinc-600 hover:text-orange-400 transition-colors pt-1">
+        <Link href="/leetcode?filter=revisit" className="block text-center text-[11px] text-zinc-600 dark:text-zinc-500 hover:text-orange-400 transition-colors pt-1">
           View all →
         </Link>
       )}

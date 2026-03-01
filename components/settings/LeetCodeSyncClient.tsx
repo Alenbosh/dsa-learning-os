@@ -171,7 +171,7 @@ export function LeetCodeSyncClient({ user }: { user: any }) {
                                 </div>
                                 <input type="range" min={5} max={100} step={5} value={importLimit}
                                     onChange={(e) => setImportLimit(parseInt(e.target.value))} className="w-full accent-orange-500" />
-                                <div className="flex justify-between text-[10px] text-zinc-600 dark:text-zinc-600">
+                                <div className="flex justify-between text-[10px] text-zinc-600 dark:text-zinc-500">
                                     <span>5</span><span>25</span><span>50</span><span>75</span><span>100</span>
                                 </div>
                                 <button onClick={importProblems} disabled={importing}
@@ -230,7 +230,7 @@ export function LeetCodeSyncClient({ user }: { user: any }) {
                                         ].map((s) => (
                                             <div key={s.label} className="bg-zinc-100 dark:bg-zinc-900 rounded-lg p-2.5 text-center">
                                                 <div className={cn("text-lg font-bold font-mono", s.color)}>{s.value}</div>
-                                                <div className="text-[10px] text-zinc-600 dark:text-zinc-600">{s.label}</div>
+                                                <div className="text-[10px] text-zinc-600 dark:text-zinc-500">{s.label}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -262,11 +262,11 @@ export function LeetCodeSyncClient({ user }: { user: any }) {
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="bg-zinc-100 dark:bg-zinc-900 rounded-lg p-3 text-center">
                                     <div className="text-2xl font-bold font-mono text-emerald-400">{importResult.imported}</div>
-                                    <div className="text-[10px] text-zinc-600 dark:text-zinc-600">New problems added</div>
+                                    <div className="text-[10px] text-zinc-600 dark:text-zinc-500">New problems added</div>
                                 </div>
                                 <div className="bg-zinc-100 dark:bg-zinc-900 rounded-lg p-3 text-center">
                                     <div className="text-2xl font-bold font-mono text-zinc-500">{importResult.skipped}</div>
-                                    <div className="text-[10px] text-zinc-600 dark:text-zinc-600">Already existed</div>
+                                    <div className="text-[10px] text-zinc-600 dark:text-zinc-500">Already existed</div>
                                 </div>
                             </div>
                             <p className="text-xs text-zinc-600 dark:text-zinc-500 text-center pt-1">
@@ -277,7 +277,7 @@ export function LeetCodeSyncClient({ user }: { user: any }) {
                         </div>
                     )}
 
-                    <p className="text-[11px] text-zinc-600 dark:text-zinc-600 leading-relaxed">
+                    <p className="text-[11px] text-zinc-600 dark:text-zinc-500 leading-relaxed">
                         ⚠️ LeetCode doesn't have an official API. This uses their public GraphQL endpoint
                         which only returns accepted submissions. Time taken, attempts, and notes must be
                         added manually. Your username must be public on LeetCode.

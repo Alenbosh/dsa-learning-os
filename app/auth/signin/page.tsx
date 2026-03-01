@@ -62,7 +62,7 @@ export default function SignInPage() {
             })}
         </div>
 
-        <p className="text-center text-xs text-zinc-500 dark:text-zinc-700 mt-6">
+        <p className="text-center text-xs text-zinc-500 dark:text-zinc-600 mt-6">
           Your data is private and only accessible by you
         </p>
       </div>

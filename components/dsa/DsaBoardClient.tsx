@@ -105,7 +105,7 @@ export function DsaBoardClient({ initialTopics }: { initialTopics: any[] }) {
                 />
               ))}
               {byStatus(col.status).length === 0 && (
-                <div className="flex items-center justify-center h-16 text-zinc-500 dark:text-zinc-700 text-xs border border-dashed border-zinc-300 dark:border-zinc-800 rounded-lg">
+                <div className="flex items-center justify-center h-16 text-zinc-500 dark:text-zinc-600 text-xs border border-dashed border-zinc-300 dark:border-zinc-800 rounded-lg">
                   Drop here
                 </div>
               )}

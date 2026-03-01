@@ -99,7 +99,7 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
         <MetaCard label="Rating" value={problem.rating?.toString() ?? "—"} />
         {problem.tags.length > 0 && (
           <div className="col-span-2 p-3 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-            <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-2">Tags</div>
+            <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-500 mb-2">Tags</div>
             <div className="flex flex-wrap gap-1.5">
               {problem.tags.map(({ tag }) => (
                 <span key={tag.id} className="text-[11px] font-mono px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 rounded">
@@ -116,7 +116,7 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {problem.pattern && (
             <div className="p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-              <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-2">💡 Pattern / Core Idea</div>
+              <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-500 mb-2">💡 Pattern / Core Idea</div>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{problem.pattern}</p>
             </div>
           )}
@@ -151,7 +151,7 @@ export function ProblemDetail({ problem }: { problem: ProblemWithTags & { topicL
 function MetaCard({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
   return (
     <div className="p-3 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-      <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600 mb-1">{label}</div>
+      <div className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-500 mb-1">{label}</div>
       <div className={cn("text-sm font-medium", mono && "font-mono text-orange-400")}>{value}</div>
     </div>
   )

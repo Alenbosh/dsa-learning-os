@@ -60,7 +60,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-32 text-zinc-600 dark:text-zinc-600">
+            <div className="flex items-center justify-center h-32 text-zinc-600 dark:text-zinc-500">
                 <Loader2 size={18} className="animate-spin mr-2" /> Loading due reviews…
             </div>
         )
@@ -68,7 +68,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
     if (total === 0) {
         return (
-            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-600 dark:text-zinc-600">
+            <div className="flex flex-col items-center justify-center h-32 gap-2 text-zinc-600 dark:text-zinc-500">
                 <CheckCircle2 size={22} className="text-emerald-500" />
                 <span className="text-sm">All caught up! No reviews due.</span>
             </div>
@@ -116,7 +116,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
 
                 {current.problems?.length > 0 && revealed && (
                     <div className="space-y-1">
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600">Linked Problems</p>
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-500">Linked Problems</p>
                         <div className="flex flex-wrap gap-1.5">
                             {current.problems.slice(0, 4).map(({ problem }: any) => (
                                 <span key={problem.id} className="text-[11px] px-2 py-0.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 rounded font-mono">
@@ -134,7 +134,7 @@ export function SpacedRepetitionQueue({ onTopicUpdated }: { onTopicUpdated?: (t:
                     </button>
                 ) : (
                     <div className="space-y-2 pt-1">
-                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-600">How well did you recall this?</p>
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-600 dark:text-zinc-500">How well did you recall this?</p>
                         <div className="grid grid-cols-3 gap-1.5">
                             {QUALITY_LABELS.map(({ value, label, color }) => (
                                 <button key={value} onClick={() => handleRate(value)} disabled={submitting}

@@ -9,7 +9,7 @@ import {
     LayoutDashboard, Code2, Brain, Layers,
     LogOut, ChevronRight, Settings, ExternalLink,
     ChevronDown, ChevronUp, Home, Menu, X, CalendarDays,
-    Sun, Moon
+    Sun, Moon, BookOpen
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "@/components/providers/ThemeProvider"
@@ -19,6 +19,7 @@ const NAV = [
     { href: "/leetcode", label: "LeetCode", icon: Code2 },
     { href: "/dsa", label: "DSA Board", icon: Brain },
     { href: "/techstack", label: "Tech Stack", icon: Layers },
+    { href: "/docs", label: "Docs", icon: BookOpen },
     { href: "/review", label: "Weekly Review", icon: CalendarDays },
     { href: "/settings", label: "Settings", icon: Settings },
 ]
@@ -47,7 +48,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                     <span className="font-bold text-sm tracking-tight">DSA Learning OS</span>
                 </div>
                 {onClose && (
-                    <button onClick={onClose} className="text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors md:hidden">
+                    <button onClick={onClose} className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors md:hidden">
                         <X size={18} />
                     </button>
                 )}
@@ -55,7 +56,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
 
             {/* Main Nav */}
             <nav className="px-2 py-4 space-y-0.5">
-                <p className="text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-600 px-3 pb-1.5">Navigation</p>
+                <p className="text-[10px] uppercase tracking-widest text-zinc-600 dark:text-zinc-500 px-3 pb-1.5">Navigation</p>
                 {NAV.map(({ href, label, icon: Icon }) => {
                     const active = href === "/" ? pathname === "/" : pathname.startsWith(href)
                     return (
@@ -67,7 +68,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                                 "flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all",
                                 active
                                     ? "bg-orange-500/10 text-orange-400"
-                                    : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/70 dark:text-zinc-500 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/70"
+                                    : "text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70"
                             )}
                         >
                             <Icon size={15} />
@@ -82,7 +83,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
             <div className="px-2 pb-4">
                 <button
                     onClick={() => setExternalOpen((v) => !v)}
-                    className="w-full flex items-center justify-between px-3 py-1.5 text-[10px] uppercase tracking-widest text-zinc-500 dark:text-zinc-600 hover:text-zinc-700 dark:hover:text-zinc-400 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-1.5 text-[10px] uppercase tracking-widest text-zinc-600 dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-400 transition-colors"
                 >
                     <span>Quick Links</span>
                     {externalOpen ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
@@ -96,7 +97,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                                 href={href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200/70 dark:hover:bg-zinc-800/70 transition-all group"
+                                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800/70 transition-all group"
                             >
                                 <span className="text-base leading-none">{icon}</span>
                                 <span className="flex-1">{label}</span>
@@ -128,18 +129,18 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                     )}
                     <div className="flex-1 min-w-0">
                         <div className="text-xs font-medium truncate">{user?.name}</div>
-                        <div className="text-[10px] text-zinc-500 dark:text-zinc-500 truncate">{user?.email}</div>
+                        <div className="text-[10px] text-zinc-500 dark:text-zinc-600 truncate">{user?.email}</div>
                     </div>
                     <button
                         onClick={toggle}
-                        className="p-1 text-zinc-500 dark:text-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-300 transition-colors"
+                        className="p-1 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
                         title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                     >
                         {theme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
                     </button>
                     <button
                         onClick={() => signOut({ callbackUrl: "/auth/signin" })}
-                        className="p-1 text-zinc-500 dark:text-zinc-600 hover:text-zinc-800 dark:hover:text-zinc-300 transition-colors"
+                        className="p-1 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"
                         title="Sign out"
                     >
                         <LogOut size={13} />
@@ -158,7 +159,7 @@ export function Sidebar({ user }: { user: any }) {
             {/* Mobile hamburger — shown in topbar area */}
             <button
                 onClick={() => setMobileOpen(true)}
-                className="md:hidden fixed top-3.5 left-4 z-50 p-1.5 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all"
+                className="md:hidden fixed top-3.5 left-4 z-50 p-1.5 rounded-md text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all"
                 aria-label="Open menu"
             >
                 <Menu size={20} />

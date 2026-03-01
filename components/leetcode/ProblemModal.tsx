@@ -219,7 +219,7 @@ export function ProblemModal({
                                 ))}
                             </div>
                             {form.topicIds.length > 0 && (
-                                <p className="text-[10px] text-zinc-600 dark:text-zinc-600">{form.topicIds.length} topic{form.topicIds.length > 1 ? "s" : ""} linked</p>
+                                <p className="text-[10px] text-zinc-600 dark:text-zinc-500">{form.topicIds.length} topic{form.topicIds.length > 1 ? "s" : ""} linked</p>
                             )}
                         </div>
                     )}

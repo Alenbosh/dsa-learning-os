@@ -21,6 +21,7 @@ model User {
     accounts         Account[]
     sessions         Session[]
     reviewSessions   ReviewSession[]
+    docBookmarks     DocBookmark[]
     createdAt        DateTime        @default(now())
 }
 
@@ -210,4 +211,20 @@ enum LearnStage {
     CurrentlyLearning
     BuildingWith
     Comfortable
+}
+
+// ── Module 4: Docs Bookmarks ────────────────────────────────────
+
+model DocBookmark {
+    id          String   @id @default(uuid())
+    userId      String
+    name        String
+    url         String
+    description String?
+    category    String? // e.g. "DSA", "Language", "Framework", "Tool"
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    @@unique([userId, url])
 }

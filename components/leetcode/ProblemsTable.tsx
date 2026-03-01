@@ -14,7 +14,7 @@ export function ProblemsTable({
 }) {
   if (!problems.length) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-zinc-600 dark:text-zinc-600">
+      <div className="flex flex-col items-center justify-center py-20 text-zinc-600 dark:text-zinc-500">
         <div className="text-4xl mb-3">🧩</div>
         <div className="text-sm">No problems match your filters</div>
       </div>
@@ -40,7 +40,7 @@ export function ProblemsTable({
                 key={p.id}
                 className="group hover:bg-zinc-100 dark:hover:bg-zinc-800/40 transition-colors"
               >
-                <td className="px-4 py-3 font-mono text-[11px] text-zinc-600 dark:text-zinc-600">{i + 1}</td>
+                <td className="px-4 py-3 font-mono text-[11px] text-zinc-600 dark:text-zinc-500">{i + 1}</td>
 
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export function ProblemsTable({
                       </span>
                     ))}
                     {p.tags.length > 3 && (
-                      <span className="text-[10px] text-zinc-600 dark:text-zinc-600">+{p.tags.length - 3}</span>
+                      <span className="text-[10px] text-zinc-600 dark:text-zinc-500">+{p.tags.length - 3}</span>
                     )}
                   </div>
                 </td>
@@ -100,7 +100,7 @@ export function ProblemsTable({
                     }>
                       {p.timeTaken}m
                     </span>
-                  ) : <span className="text-zinc-400 dark:text-zinc-700">—</span>}
+                  ) : <span className="text-zinc-400 dark:text-zinc-600">—</span>}
                 </td>
 
                 <td className="px-4 py-3">
@@ -113,13 +113,13 @@ export function ProblemsTable({
                     )}>
                       {p.solved === "FullSolution" ? "Full Sol." : p.solved}
                     </span>
-                  ) : <span className="text-zinc-400 dark:text-zinc-700">—</span>}
+                  ) : <span className="text-zinc-400 dark:text-zinc-600">—</span>}
                 </td>
 
                 <td className="px-4 py-3 font-mono text-[11px]">
                   {p.confidence ? (
-                    <span className="text-orange-400">{"★".repeat(p.confidence)}<span className="text-zinc-300 dark:text-zinc-700">{"★".repeat(5 - p.confidence)}</span></span>
-                  ) : <span className="text-zinc-400 dark:text-zinc-700">—</span>}
+                    <span className="text-orange-400">{"★".repeat(p.confidence)}<span className="text-zinc-300 dark:text-zinc-600">{"★".repeat(5 - p.confidence)}</span></span>
+                  ) : <span className="text-zinc-400 dark:text-zinc-600">—</span>}
                 </td>
 
                 <td className="px-4 py-3">

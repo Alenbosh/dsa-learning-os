@@ -7,6 +7,7 @@ const PAGE_TITLES: Record<string, { title: string; desc: string }> = {
     "/leetcode": { title: "LeetCode Tracker", desc: "Problems, patterns & notes" },
     "/dsa": { title: "DSA Study Board", desc: "Topics, revision & resources" },
     "/techstack": { title: "Tech Stack", desc: "Your learning pipeline" },
+    "/docs": { title: "Docs", desc: "Search and star documentation" },
     "/review": { title: "Weekly Review", desc: "Your progress by week" },
     "/settings": { title: "Settings", desc: "Account & integrations" },
 }
@@ -21,7 +22,7 @@ export function Topbar() {
     const meta = key ? PAGE_TITLES[key] : { title: "DSA Learning OS", desc: "" }
 
     return (
-        <header className="h-14 shrink-0 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80
+        <header className="h-14 shrink-0 border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/80
                        backdrop-blur-sm flex items-center px-6 pl-14 md:pl-6">
             <div>
                 <h2 className="text-sm font-semibold">{meta.title}</h2>

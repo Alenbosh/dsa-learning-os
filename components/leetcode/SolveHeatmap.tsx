@@ -41,7 +41,7 @@ export function SolveHeatmap({ problems }: { problems: ProblemWithTags[] }) {
                 showWeekdayLabels
             />
             <Tooltip id="heatmap-tip" />
-            <div className="flex items-center gap-1 justify-end mt-2 text-zinc-600 dark:text-zinc-600">
+            <div className="flex items-center gap-1 justify-end mt-2 text-zinc-600 dark:text-zinc-500">
                 <span>Less</span>
                 {["bg-zinc-200 dark:bg-zinc-800", "bg-emerald-200 dark:bg-emerald-900", "bg-emerald-300 dark:bg-emerald-800", "bg-emerald-400 dark:bg-emerald-700", "bg-emerald-500 dark:bg-emerald-600"].map((c, i) => (
                     <div key={i} className={`w-3 h-3 rounded-sm ${c}`} />

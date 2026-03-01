@@ -56,13 +56,13 @@ export function WeeklyReviewClient({ user }: { user: any }) {
             </div>
 
             {loading ? (
-                <div className="flex items-center justify-center h-48 text-zinc-600 dark:text-zinc-600">
+                <div className="flex items-center justify-center h-48 text-zinc-600 dark:text-zinc-500">
                     <Loader2 size={18} className="animate-spin mr-2" /> Loading weekly data…
                 </div>
             ) : !data ? null : (
                 <>
                     {/* Date range */}
-                    <p className="text-xs text-zinc-600 dark:text-zinc-600">
+                    <p className="text-xs text-zinc-600 dark:text-zinc-500">
                         {format(parseISO(data.weekStart), "MMM d")} – {format(parseISO(data.weekEnd), "MMM d, yyyy")}
                     </p>
 
@@ -100,7 +100,7 @@ export function WeeklyReviewClient({ user }: { user: any }) {
                                         )}
                                     </div>
                                     {/* Label */}
-                                    <span className="text-[10px] text-zinc-600 dark:text-zinc-600 font-medium">{day.label}</span>
+                                    <span className="text-[10px] text-zinc-600 dark:text-zinc-500 font-medium">{day.label}</span>
                                     <span className="text-[11px] font-bold text-zinc-700 dark:text-zinc-400">{day.problemsSolved}</span>
                                     {day.reviewsDone > 0 && (
                                         <span className="text-[9px] text-blue-500">{day.reviewsDone}r</span>
@@ -137,7 +137,7 @@ export function WeeklyReviewClient({ user }: { user: any }) {
                                                 </span>
                                             )}
                                             {topic.avgRating > 0 && (
-                                                <span className="text-[10px] text-zinc-600 dark:text-zinc-600">avg {topic.avgRating.toFixed(1)}/5</span>
+                                                <span className="text-[10px] text-zinc-600 dark:text-zinc-500">avg {topic.avgRating.toFixed(1)}/5</span>
                                             )}
                                         </div>
                                     </div>
@@ -165,11 +165,11 @@ export function WeeklyReviewClient({ user }: { user: any }) {
                                         ) : (
                                             <span className="text-xs text-zinc-600 dark:text-zinc-400 flex-1 truncate">{p.name}</span>
                                         )}
-                                        <span className="text-[10px] text-zinc-600 dark:text-zinc-600 shrink-0">
+                                        <span className="text-[10px] text-zinc-600 dark:text-zinc-500 shrink-0">
                                             {p.date ? format(new Date(p.date), "EEE") : ""}
                                         </span>
                                         {p.pattern && (
-                                            <span className="text-[10px] text-zinc-600 dark:text-zinc-600 hidden md:block max-w-[120px] truncate">{p.pattern}</span>
+                                            <span className="text-[10px] text-zinc-600 dark:text-zinc-500 hidden md:block max-w-[120px] truncate">{p.pattern}</span>
                                         )}
                                     </div>
                                 ))}
@@ -178,7 +178,7 @@ export function WeeklyReviewClient({ user }: { user: any }) {
                     )}
 
                     {data.summary.totalProblems === 0 && data.summary.topicsReviewed === 0 && (
-                        <div className="flex flex-col items-center justify-center py-12 text-zinc-600 dark:text-zinc-700 gap-2">
+                        <div className="flex flex-col items-center justify-center py-12 text-zinc-600 dark:text-zinc-500 gap-2">
                             <Trophy size={28} />
                             <span className="text-sm">No activity logged this week.</span>
                         </div>
@@ -194,7 +194,7 @@ function StatBox({ icon, label, value, sub }: { icon: React.ReactNode; label: st
         <div className="bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4">
             <div className="flex items-center gap-2 mb-2">{icon}<span className="text-[11px] text-zinc-600 dark:text-zinc-500 font-medium uppercase tracking-wide">{label}</span></div>
             <div className="text-2xl font-bold">{value}</div>
-            {sub && <div className="text-[10px] text-zinc-600 dark:text-zinc-600 mt-0.5">{sub}</div>}
+            {sub && <div className="text-[10px] text-zinc-600 dark:text-zinc-500 mt-0.5">{sub}</div>}
         </div>
     )
 }
@@ -203,7 +203,7 @@ function Legend({ color, label }: { color: string; label: string }) {
     return (
         <div className="flex items-center gap-1.5">
             <div className={cn("w-2.5 h-2.5 rounded-sm", color)} />
-            <span className="text-[10px] text-zinc-600 dark:text-zinc-600">{label}</span>
+            <span className="text-[10px] text-zinc-600 dark:text-zinc-500">{label}</span>
         </div>
     )
 }

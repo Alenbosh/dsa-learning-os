@@ -134,7 +134,7 @@ export function TechModal({ tech, onSaved, onDeleted, onClose }: {
                   <button
                     type="button"
                     onClick={() => setResources(resources.filter((_, j) => j !== i))}
-                    className="text-zinc-500 dark:text-zinc-700 hover:text-rose-400 transition-colors"
+                    className="text-zinc-500 dark:text-zinc-600 hover:text-rose-400 transition-colors"
                   >
                     ✕
                   </button>
