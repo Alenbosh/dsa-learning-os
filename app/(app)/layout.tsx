@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { authOptions } from "@/lib/auth"
 import { Sidebar } from "@/components/layout/Sidebar"
 import { Topbar } from "@/components/layout/Topbar"
+import { AppKeybindings } from "@/components/layout/AppKeybindings"
 
 export default async function AppLayout({
   children,
@@ -14,6 +15,7 @@ export default async function AppLayout({
 
   return (
     <div className="flex h-screen overflow-hidden">
+      <AppKeybindings />
       <Sidebar user={session.user} />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Topbar />

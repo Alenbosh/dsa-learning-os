@@ -23,11 +23,14 @@ export function Topbar() {
 
     return (
         <header className="h-14 shrink-0 border-b border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-950/80
-                       backdrop-blur-sm flex items-center px-6 pl-14 md:pl-6">
+                       backdrop-blur-sm flex items-center justify-between px-6 pl-14 md:pl-6">
             <div>
                 <h2 className="text-sm font-semibold">{meta.title}</h2>
                 {meta.desc && <p className="text-[11px] text-zinc-600 dark:text-zinc-500">{meta.desc}</p>}
             </div>
+            <p className="hidden md:block text-[11px] text-zinc-500 dark:text-zinc-600">
+                Press <kbd className="rounded border border-zinc-300 dark:border-zinc-700 px-1 py-0.5 text-[10px] font-medium">?</kbd> for shortcuts
+            </p>
         </header>
     )
 }
