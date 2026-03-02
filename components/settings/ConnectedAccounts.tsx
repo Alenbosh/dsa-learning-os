@@ -49,7 +49,6 @@ const PROVIDERS: ProviderConfig[] = [
 
 interface LinkedAccount {
     provider: string
-    createdAt: string
 }
 
 interface Props {

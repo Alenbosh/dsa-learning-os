@@ -15,8 +15,8 @@ export default async function SettingsPage() {
         }),
         prisma.account.findMany({
             where: { userId },
-            select: { provider: true, createdAt: true },
-            orderBy: { createdAt: "asc" },
+            select: { provider: true },
+            orderBy: { provider: "asc" },
         }),
     ])
 
@@ -48,10 +48,7 @@ export default async function SettingsPage() {
 
             {/* Connected providers — the safe account-linking section */}
             <ConnectedAccounts
-                linkedAccounts={linkedAccounts.map((a) => ({
-                    provider: a.provider,
-                    createdAt: a.createdAt.toISOString(),
-                }))}
+                linkedAccounts={linkedAccounts}
                 availableProviders={availableProviders}
             />
 

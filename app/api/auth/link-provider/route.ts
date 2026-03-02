@@ -67,8 +67,8 @@ export async function GET() {
 
   const accounts = await prisma.account.findMany({
     where: { userId },
-    select: { provider: true, createdAt: true },
-    orderBy: { createdAt: "asc" },
+    select: { provider: true },
+    orderBy: { provider: "asc" },
   });
 
   return NextResponse.json(accounts);
