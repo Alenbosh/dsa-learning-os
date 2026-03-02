@@ -215,11 +215,12 @@ export function ConnectedAccounts({ linkedAccounts: initial, availableProviders 
                                     </button>
                                 ) : (
                                     <button
+                                        type="button"
                                         onClick={() => connect(provider.id)}
-                                        disabled={isLoading !== null}
+                                        disabled={isLoading}
                                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium
                                bg-orange-500 hover:bg-orange-400 text-white
-                               border border-orange-600 transition-colors disabled:opacity-50"
+                               border border-orange-600 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                                     >
                                         {isLoading
                                             ? <Loader2 size={11} className="animate-spin" />
