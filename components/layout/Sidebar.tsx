@@ -123,10 +123,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
                             {user?.name?.[0]?.toUpperCase() || "U"}
                         </div>
                     )}
-                    <div className="flex-1 min-w-0">
-                        <div className="text-xs font-medium truncate">{user?.name}</div>
-                        <div className="text-[10px] text-zinc-500 dark:text-zinc-600 truncate">{user?.email}</div>
-                    </div>
+                    <div className="flex-1" />
                     <button
                         onClick={toggle}
                         className="p-1 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 transition-colors"

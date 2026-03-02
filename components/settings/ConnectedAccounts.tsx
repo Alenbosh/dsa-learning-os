@@ -67,15 +67,25 @@ export function ConnectedAccounts({ linkedAccounts: initial, availableProviders 
     async function connect(providerId: string) {
         setLoading(providerId)
         try {
-            // signIn with redirect:false first — NextAuth will detect the existing
-            // session and link the new provider to the current user via PrismaAdapter
-            await signIn(providerId, {
+            const result = await signIn(providerId, {
                 callbackUrl: "/settings?linked=" + providerId,
-                redirect: true,
+                redirect: false,
             })
-            // Page will reload after OAuth — no further action needed here
+
+            if (result?.error) {
+                toast.error(`Failed to connect ${providerId}: ${result.error}`)
+                return
+            }
+
+            if (result?.url) {
+                window.location.href = result.url
+                return
+            }
+
+            toast.error(`Failed to connect ${providerId}`)
         } catch {
             toast.error("Failed to connect " + providerId)
+        } finally {
             setLoading(null)
         }
     }
