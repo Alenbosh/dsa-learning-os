@@ -28,8 +28,10 @@ export function Topbar() {
                 <h2 className="text-sm font-semibold">{meta.title}</h2>
                 {meta.desc && <p className="text-[11px] text-zinc-600 dark:text-zinc-500">{meta.desc}</p>}
             </div>
-            <p className="hidden md:block text-[11px] text-zinc-500 dark:text-zinc-600">
-                Press <kbd className="rounded border border-zinc-300 dark:border-zinc-700 px-1 py-0.5 text-[10px] font-medium">?</kbd> for shortcuts
+            <p className="hidden md:flex items-center gap-1.5 text-[10px] text-zinc-500 dark:text-zinc-600">
+                <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/80 text-[10px] font-mono font-medium">⌘</kbd>
+                <kbd className="inline-flex items-center justify-center h-5 px-1.5 rounded border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800/80 text-[10px] font-mono font-medium">K</kbd>
+                <span className="ml-0.5">command palette</span>
             </p>
         </header>
     )
