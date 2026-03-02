@@ -10,10 +10,29 @@ export default async function LeetCodePage() {
   const [problems, tags] = await Promise.all([
     prisma.problem.findMany({
       where: { userId },
-      include: { tags: { include: { tag: true } } },
+      select: {
+        id: true,
+        userId: true,
+        name: true,
+        url: true,
+        difficulty: true,
+        date: true,
+        timeTaken: true,
+        attempts: true,
+        solved: true,
+        confidence: true,
+        rating: true,
+        pattern: true,
+        mistake: true,
+        isContest: true,
+        revisit: true,
+        createdAt: true,
+        updatedAt: true,
+        tags: { select: { tag: { select: { id: true, name: true } } } },
+      },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.tag.findMany({ orderBy: { name: "asc" } }),
+    prisma.tag.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" } }),
   ])
 
   return <ProblemsClient initialProblems={problems as any} tags={tags} />

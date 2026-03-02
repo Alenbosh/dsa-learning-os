@@ -10,8 +10,8 @@ export async function GET() {
 
   const topics = await prisma.dsaTopic.findMany({
     where: { userId },
-    include: { problems: { include: { problem: true } }, resources: true },
-    orderBy: { order: "asc" },
+    select: { id: true, name: true, order: true },
+    orderBy: { name: "asc" },
   })
   return NextResponse.json(topics)
 }

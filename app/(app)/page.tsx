@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
@@ -17,36 +18,43 @@ export default async function DashboardPage() {
 
     const now = new Date()
 
-    const [problems, topics, techStack] = await Promise.all([
+    const [problemStatsRows, revisionProblems, topics, techLearningCount] = await Promise.all([
         prisma.problem.findMany({
             where: { userId },
-            include: { tags: { include: { tag: true } } },
+            select: { difficulty: true, revisit: true, date: true },
             orderBy: { createdAt: "desc" },
         }),
-        prisma.dsaTopic.findMany({ where: { userId } }),
-        prisma.techStack.findMany({ where: { userId } }),
+        prisma.problem.findMany({
+            where: { userId, revisit: true },
+            select: { id: true, name: true, difficulty: true, url: true },
+            orderBy: { createdAt: "desc" },
+            take: 5,
+        }),
+        prisma.dsaTopic.findMany({
+            where: { userId },
+            select: { status: true, sm2NextReview: true },
+        }),
+        prisma.techStack.count({
+            where: { userId, stage: "CurrentlyLearning" },
+        }),
     ])
 
-    const streak = calculateStreak(problems as any)
+    const streak = calculateStreak(problemStatsRows as any)
 
     const dueForReview = topics.filter(
         (t) => !t.sm2NextReview || t.sm2NextReview <= now
     ).length
 
     const stats = {
-        total: problems.length,
-        easy: problems.filter((p) => p.difficulty === "Easy").length,
-        medium: problems.filter((p) => p.difficulty === "Medium").length,
-        hard: problems.filter((p) => p.difficulty === "Hard").length,
-        revisit: problems.filter((p) => p.revisit).length,
+        total: problemStatsRows.length,
+        easy: problemStatsRows.filter((p) => p.difficulty === "Easy").length,
+        medium: problemStatsRows.filter((p) => p.difficulty === "Medium").length,
+        hard: problemStatsRows.filter((p) => p.difficulty === "Hard").length,
+        revisit: problemStatsRows.filter((p) => p.revisit).length,
         topicsInProgress: topics.filter((t) => t.status === "InProgress").length,
         topicsRevision: topics.filter((t) => t.status === "NeedsRevision").length,
-        techLearning: techStack.filter((t) => t.stage === "CurrentlyLearning").length,
+        techLearning: techLearningCount,
     }
-
-    const revisionProblems = problems
-        .filter((p) => p.revisit)
-        .slice(0, 5) as any
 
     return (
         <div className="space-y-8 max-w-6xl">
@@ -98,7 +106,7 @@ export default async function DashboardPage() {
                         <TrendingUp size={15} className="text-orange-400" />
                         <span className="text-sm font-semibold">Solve Activity</span>
                     </div>
-                    <SolveHeatmap problems={problems as any} />
+                    <SolveHeatmap problems={problemStatsRows as any} />
                 </div>
 
                 {/* Revision Queue */}
@@ -107,7 +115,7 @@ export default async function DashboardPage() {
                         <BookOpen size={15} className="text-amber-400" />
                         <span className="text-sm font-semibold">Revision Queue</span>
                     </div>
-                    <RevisionQueue problems={revisionProblems} />
+                    <RevisionQueue problems={revisionProblems as any} />
                 </div>
             </div>
 
@@ -145,13 +153,13 @@ function QuickLink({ href, icon, title, desc }: {
     href: string; icon: React.ReactNode; title: string; desc: string
 }) {
     return (
-        <a href={href} className="group flex items-center gap-4 p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-150">
+        <Link href={href} className="group flex items-center gap-4 p-4 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-all duration-150">
             <div className="p-2.5 bg-zinc-100 dark:bg-zinc-800 rounded-lg group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-colors">{icon}</div>
             <div>
                 <div className="font-semibold text-sm">{title}</div>
                 <div className="text-xs text-zinc-600 dark:text-zinc-500">{desc}</div>
             </div>
-        </a>
+        </Link>
     )
 }
 

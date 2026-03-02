@@ -9,9 +9,14 @@ export default async function DsaPage() {
 
   const topics = await prisma.dsaTopic.findMany({
     where: { userId },
-    include: {
-      problems: { include: { problem: { include: { tags: { include: { tag: true } } } } } },
-      resources: true,
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      confidence: true,
+      lastReviewed: true,
+      order: true,
+      problems: { select: { problemId: true } },
     },
     orderBy: { order: "asc" },
   })
