@@ -1,0 +1,23 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer rounded square background -->
+  <rect width="32" height="32" rx="8" fill="#ea580c"/>
+
+  <!-- Left bracket arm -->
+  <path d="M9 10 L9 22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Left bracket top tick -->
+  <path d="M9 10 L12 10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Left bracket bottom tick -->
+  <path d="M9 22 L12 22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Right bracket arm -->
+  <path d="M23 10 L23 22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right bracket top tick -->
+  <path d="M23 10 L20 10" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right bracket bottom tick -->
+  <path d="M23 22 L20 22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Center node dot — the "data point" -->
+  <circle cx="16" cy="16" r="2.5" fill="white"/>
+  <!-- Horizontal connecting line through node -->
+  <path d="M13 16 L19 16" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

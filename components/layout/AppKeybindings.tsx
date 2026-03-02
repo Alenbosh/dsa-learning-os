@@ -31,7 +31,7 @@ const NAV_COMMANDS: Command[] = [
         shortcut: ["G", "H"],
         icon: <Home size={14} />,
         group: "Navigation",
-        keywords: "dashboard overview streak heatmap",
+        keywords: "dashboard overview streak heatmap search",
     },
     {
         id: "leetcode",
@@ -111,9 +111,7 @@ function filterCommands(commands: Command[], query: string): Command[] {
     const q = query.toLowerCase()
     return commands.filter((cmd) =>
         [cmd.label, cmd.description ?? "", cmd.keywords ?? "", cmd.group]
-            .join(" ")
-            .toLowerCase()
-            .includes(q)
+            .join(" ").toLowerCase().includes(q)
     )
 }
 
@@ -146,10 +144,8 @@ export function AppKeybindings() {
 
     const filtered = useMemo(() => filterCommands(NAV_COMMANDS, query), [query])
 
-    // Reset active index on filter change
     useEffect(() => { setActiveIndex(0) }, [filtered.length, query])
 
-    // Focus input on open, reset on close
     useEffect(() => {
         if (open) {
             setTimeout(() => inputRef.current?.focus(), 10)
@@ -159,7 +155,6 @@ export function AppKeybindings() {
         }
     }, [open])
 
-    // Keep active item in view
     useEffect(() => {
         if (!listRef.current) return
         const items = listRef.current.querySelectorAll("[data-cmd-item]")
@@ -181,7 +176,7 @@ export function AppKeybindings() {
         }
 
         const onKeyDown = (e: KeyboardEvent) => {
-            // ⌘K / Ctrl+K
+            // ⌘K / Ctrl+K — toggle command palette
             if ((e.metaKey || e.ctrlKey) && e.key === "k") {
                 e.preventDefault()
                 setOpen((v) => !v)
@@ -189,14 +184,14 @@ export function AppKeybindings() {
                 return
             }
 
-            // Escape
+            // Escape — close palette
             if (e.key === "Escape") {
                 if (open) { e.preventDefault(); closePalette() }
                 clearG()
                 return
             }
 
-            // Palette open — arrow + enter navigation
+            // Palette-open navigation
             if (open) {
                 if (e.key === "ArrowDown") {
                     e.preventDefault()
@@ -212,7 +207,26 @@ export function AppKeybindings() {
                 return
             }
 
-            // Palette closed — G-then-key shortcuts
+            // / key — focus the home search bar (if on home page) or navigate home
+            if (e.key === "/" && !isEditableTarget(e.target) && !e.metaKey && !e.ctrlKey) {
+                e.preventDefault()
+                clearG()
+
+                // Try to find the home search input anywhere in the DOM
+                const homeInput = document.querySelector<HTMLInputElement>(
+                    "[data-home-search]"
+                )
+                if (homeInput) {
+                    homeInput.focus()
+                    homeInput.select()
+                } else {
+                    // Not on home — navigate there first, search will autofocus via URL
+                    router.push("/?focus=search")
+                }
+                return
+            }
+
+            // G-then-key shortcuts
             if (isEditableTarget(e.target)) return
             if (e.metaKey || e.ctrlKey || e.altKey) return
 
@@ -258,7 +272,7 @@ export function AppKeybindings() {
                         shadow-[0_32px_96px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.03)]
                         overflow-hidden">
 
-                    {/* ── Search input ── */}
+                    {/* Search input */}
                     <div className="flex items-center gap-3 px-4 py-3.5 border-b border-zinc-800/80">
                         <Search size={14} className="shrink-0 text-zinc-500" />
                         <input
@@ -271,10 +285,7 @@ export function AppKeybindings() {
                             spellCheck={false}
                         />
                         {query ? (
-                            <button
-                                onClick={() => setQuery("")}
-                                className="text-zinc-600 hover:text-zinc-400 transition-colors"
-                            >
+                            <button onClick={() => setQuery("")} className="text-zinc-600 hover:text-zinc-400 transition-colors">
                                 <X size={13} />
                             </button>
                         ) : (
@@ -282,7 +293,7 @@ export function AppKeybindings() {
                         )}
                     </div>
 
-                    {/* ── Results ── */}
+                    {/* Results */}
                     <div ref={listRef} className="max-h-[340px] overflow-y-auto overscroll-contain">
                         {filtered.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-12 gap-2 text-zinc-700">
@@ -303,37 +314,27 @@ export function AppKeybindings() {
                                             onClick={() => runCommand(cmd)}
                                             onMouseEnter={() => setActiveIndex(idx)}
                                             className={cn(
-                                                "w-full flex items-center gap-3 px-3 mx-1 py-2.5 rounded-lg text-left",
-                                                "transition-all duration-75",
+                                                "w-full flex items-center gap-3 px-3 mx-1 py-2.5 rounded-lg text-left transition-all duration-75",
                                                 isActive ? "bg-zinc-800" : "hover:bg-zinc-800/50"
                                             )}
                                             style={{ width: "calc(100% - 8px)" }}
                                         >
-                                            {/* Icon */}
                                             <span className={cn(
-                                                "flex items-center justify-center w-7 h-7 rounded-lg shrink-0",
-                                                "border transition-colors duration-75",
+                                                "flex items-center justify-center w-7 h-7 rounded-lg shrink-0 border transition-colors duration-75",
                                                 isActive
                                                     ? "bg-orange-500/15 border-orange-500/30 text-orange-400"
                                                     : "bg-zinc-800/80 border-zinc-700/60 text-zinc-500"
                                             )}>
                                                 {cmd.icon}
                                             </span>
-
-                                            {/* Text */}
                                             <div className="flex-1 min-w-0">
-                                                <p className={cn(
-                                                    "text-sm font-medium leading-none mb-0.5 transition-colors",
-                                                    isActive ? "text-zinc-100" : "text-zinc-300"
-                                                )}>
+                                                <p className={cn("text-sm font-medium leading-none mb-0.5 transition-colors", isActive ? "text-zinc-100" : "text-zinc-300")}>
                                                     {cmd.label}
                                                 </p>
                                                 {cmd.description && (
                                                     <p className="text-[11px] text-zinc-600 truncate">{cmd.description}</p>
                                                 )}
                                             </div>
-
-                                            {/* Right side: enter hint OR shortcut badges */}
                                             <div className="flex items-center gap-1 shrink-0">
                                                 {isActive ? (
                                                     <span className="flex items-center gap-1 text-[10px] text-zinc-500 font-mono">
@@ -352,14 +353,13 @@ export function AppKeybindings() {
                         )}
                     </div>
 
-                    {/* ── Footer ── */}
-                    <div className="flex items-center justify-between px-4 py-2.5
-                          border-t border-zinc-800/80 bg-zinc-950/50">
+                    {/* Footer */}
+                    <div className="flex items-center justify-between px-4 py-2.5 border-t border-zinc-800/80 bg-zinc-950/50">
                         <div className="flex items-center gap-3 text-[10px] text-zinc-600">
                             <span className="flex items-center gap-1"><Kbd>↑</Kbd><Kbd>↓</Kbd> navigate</span>
                             <span className="flex items-center gap-1"><Kbd>↵</Kbd> open</span>
-                            <span className="hidden sm:flex items-center gap-1 text-zinc-700">
-                                <Kbd>G</Kbd><span className="text-zinc-700 mx-0.5">then key</span><span>to jump</span>
+                            <span className="hidden sm:flex items-center gap-1">
+                                <Kbd>/</Kbd><span className="text-zinc-700 ml-1">focus search</span>
                             </span>
                         </div>
                         <div className="flex items-center gap-1.5 text-[10px] text-zinc-700">
@@ -370,7 +370,6 @@ export function AppKeybindings() {
                 </div>
             </div>
 
-            {/* Animations */}
             <style>{`
         @keyframes kpFadeIn {
           from { opacity: 0 }
@@ -378,7 +377,7 @@ export function AppKeybindings() {
         }
         @keyframes kpSlideDown {
           from { opacity: 0; transform: translateX(-50%) translateY(-12px) scale(0.96); }
-          to   { opacity: 1; transform: translateX(-50%) translateY(0)      scale(1);   }
+          to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
         }
       `}</style>
         </>

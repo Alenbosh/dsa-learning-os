@@ -79,6 +79,18 @@ export function HomeSearch() {
     const inputRef = useRef<HTMLInputElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
 
+    // Auto-focus when navigated here via "/" keybinding from another page
+    useEffect(() => {
+        if (typeof window === "undefined") return
+        const params = new URLSearchParams(window.location.search)
+        if (params.get("focus") === "search") {
+            setTimeout(() => {
+                inputRef.current?.focus()
+                window.history.replaceState({}, "", window.location.pathname)
+            }, 80)
+        }
+    }, [])
+
     const [query, setQuery] = useState("")
     const [loading, setLoading] = useState(false)
     const [dbResults, setDbResults] = useState<SearchResult[]>([])
@@ -222,7 +234,7 @@ export function HomeSearch() {
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={onKeyDown}
                     onFocus={() => query.trim() && setOpen(true)}
-                    placeholder="Search problems, topics, docs, tech… or anything"
+                    data-home-search="" placeholder="Search problems, topics, docs, tech… or anything"
                     className="flex-1 bg-transparent text-sm text-zinc-900 dark:text-zinc-100
                      placeholder-zinc-400 dark:placeholder-zinc-600
                      outline-none caret-orange-500"

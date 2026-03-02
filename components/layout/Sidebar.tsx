@@ -12,6 +12,7 @@ import {
     Sun, Moon, BookOpen
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { AppLogo } from "@/components/shared/AppLogo"
 import { useTheme } from "@/components/providers/ThemeProvider"
 
 const NAV = [
@@ -41,12 +42,7 @@ function SidebarContent({ user, onClose }: { user: any; onClose?: () => void }) 
         <div className="flex flex-col h-full">
             {/* Logo */}
             <div className="flex items-center justify-between px-4 py-5 border-b border-zinc-200 dark:border-zinc-800">
-                <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 bg-orange-500 rounded-md flex items-center justify-center shrink-0">
-                        <Code2 size={14} className="text-white" />
-                    </div>
-                    <span className="font-bold text-sm tracking-tight">DSA Learning OS</span>
-                </div>
+                <AppLogo size={28} />
                 {onClose && (
                     <button onClick={onClose} className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors md:hidden">
                         <X size={18} />
