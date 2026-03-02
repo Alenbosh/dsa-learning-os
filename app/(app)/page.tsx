@@ -6,10 +6,11 @@ import { StatsCard } from "@/components/shared/StatsCard"
 import { SolveHeatmap } from "@/components/leetcode/SolveHeatmap"
 import { RevisionQueue } from "@/components/dsa/RevisionQueue"
 import { SpacedRepetitionQueue } from "@/components/dsa/SpacedRepetitionQueue"
+import { HomeSearch } from "@/components/home/HomeSearch"
 import { calculateStreak } from "@/lib/utils"
 import {
     Code2, Brain, Layers, Flame,
-    AlertCircle, TrendingUp, BookOpen, Zap, CalendarDays
+    TrendingUp, BookOpen, Zap, CalendarDays
 } from "lucide-react"
 
 export default async function DashboardPage() {
@@ -50,7 +51,6 @@ export default async function DashboardPage() {
         easy: problemStatsRows.filter((p) => p.difficulty === "Easy").length,
         medium: problemStatsRows.filter((p) => p.difficulty === "Medium").length,
         hard: problemStatsRows.filter((p) => p.difficulty === "Hard").length,
-        revisit: problemStatsRows.filter((p) => p.revisit).length,
         topicsInProgress: topics.filter((t) => t.status === "InProgress").length,
         topicsRevision: topics.filter((t) => t.status === "NeedsRevision").length,
         techLearning: techLearningCount,
@@ -58,12 +58,16 @@ export default async function DashboardPage() {
 
     return (
         <div className="space-y-8 max-w-6xl">
+            {/* Greeting */}
             <div>
                 <h1 className="text-2xl font-bold tracking-tight">
                     Good {getGreeting()}, {session!.user?.name?.split(" ")[0]} 👋
                 </h1>
-                <p className="text-zinc-600 dark:text-zinc-500 text-sm mt-1">Here's your learning progress</p>
+                <p className="text-zinc-600 dark:text-zinc-500 text-sm mt-1">Here&apos;s your learning progress</p>
             </div>
+
+            {/* ── Global Search Bar ── */}
+            <HomeSearch />
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
